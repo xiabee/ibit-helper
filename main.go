@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"xiabee/pre"
 )
@@ -17,9 +18,13 @@ func main() {
 	argv := os.Args
 
 	comp_str := "学工号"
+	// “学工号”为已做核酸名单中的索引
+
 	to_str := "学号"
 	str1 := "姓名"
 	str2 := "班级标注"
+	// 此三者为总名单中的索引
+
 	var stu []Student
 
 	if argc != 3 {
@@ -49,11 +54,20 @@ func main() {
 
 	incomplete := pre.Diff(to, comp) //对总名单求差集，得到未完成核酸的学号列表
 
+	outputfile, err := os.OpenFile("./未完成.csv", os.O_WRONLY|os.O_CREATE, 0)
+	if err != nil {
+		log.Println(err)
+	}
+	// 写入文件
+
+	fmt.Fprintf(outputfile, "姓名,学号,班级\n")
 	for i := 0; i < len(to); i++ {
 		for j := 0; j < len(incomplete); j++ {
 			if incomplete[j] == stu[i].Id {
-				fmt.Println(stu[i].Id, stu[i].Name, stu[i].Class)
+				// fmt.Println(stu[i].Id, stu[i].Name, stu[i].Class)
+				fmt.Fprintf(outputfile, "%s,%s,%s\n", stu[i].Id, stu[i].Name, stu[i].Class)
 			}
 		}
 	}
+	fmt.Println("Success!")
 }
