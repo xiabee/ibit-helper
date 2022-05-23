@@ -58,14 +58,16 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
+	defer outputfile.Close()
 	// 写入文件
+	outputfile.WriteString("\xEF\xBB\xBF") // 写入UTF-8 BOM，防止中文乱码
 
-	fmt.Fprintf(outputfile, "姓名,学号,班级\n")
+	fmt.Fprintf(outputfile, "序号,学号,姓名,班级\n")
 	for i := 0; i < len(to); i++ {
 		for j := 0; j < len(incomplete); j++ {
 			if incomplete[j] == stu[i].Id {
 				// fmt.Println(stu[i].Id, stu[i].Name, stu[i].Class)
-				fmt.Fprintf(outputfile, "%s,%s,%s\n", stu[i].Id, stu[i].Name, stu[i].Class)
+				fmt.Fprintf(outputfile, "%d,%s,%s,%s\n", i+1, stu[i].Id, stu[i].Name, stu[i].Class)
 			}
 		}
 	}
