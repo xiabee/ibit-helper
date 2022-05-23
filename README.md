@@ -4,8 +4,25 @@ i北理疫情防控打卡 表格比对
 
 
 
+### 编译
+
 ```bash
 go mod tidy
 go build main.go
-./main
+```
+
+
+
+### 运行
+
+* Linux:
+
+```bash
+./main  已完成核酸名单.xlsx  全体学生名单.xlsx
+```
+
+* Windows:
+
+```bash
+main.exe 已完成核酸名单.xlsx  全体学生名单.xlsx
 ```
