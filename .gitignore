@@ -1,4 +1,6 @@
 .vscode/
+.git/
 *.xlsx
 *.csv
 *.tsv
+*.exe
