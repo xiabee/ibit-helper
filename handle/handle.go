@@ -20,7 +20,7 @@ func Handle(file1, file2 string) bool {
 	// “学工号”为已做核酸名单中的索引
 
 	title := Student{Id: "学号", Name: "姓名"}
-	// 此三者为总名单中的索引
+	// 此二者为总名单中的索引
 
 	var stu []Student
 

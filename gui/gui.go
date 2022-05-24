@@ -14,7 +14,8 @@ import (
 )
 
 func fileopen(w fyne.Window) {
-	var file1, file2 string
+	file1 := ""
+	file2 := ""
 
 	msg_state := widget.NewLabel("")
 	msg_file1 := widget.NewLabel("")
@@ -39,23 +40,28 @@ func fileopen(w fyne.Window) {
 	// 输入文件按钮
 
 	bt1 := widget.NewButton("运行", func() {
-		msg_state.SetText("运行中")
-		flag := handle.Handle(file1, file2)
-		msg_state.SetText("已完成")
-		if flag {
-			msg_end.SetText("执行失败，请检查输入文件是否正确！")
+		if file1 != "" && file2 != "" {
+			msg_state.SetText("运行中")
+			flag := handle.Handle(file1, file2)
+			msg_state.SetText("已完成")
+			if flag {
+				msg_end.SetText("执行失败，请检查输入文件是否正确！")
+			} else {
+				msg_end.SetText("执行成功，生成文件：未完成.csv")
+			}
 		} else {
-			msg_end.SetText("执行成功，生成文件：未完成.csv")
+			msg_end.SetText("请选择文件")
 		}
 
 	})
 	// 启动按钮
+
 	uri := storage.NewFileURI(".")
 	luri, _ := storage.ListerForURI(uri)
 	dl1.SetLocation(luri)
 	dl2.SetLocation(luri)
 	// 默认打开当前目录
-	btn1 := widget.NewButton("已打卡名单", func() {
+	btn1 := widget.NewButton("已完成核酸检测的名单", func() {
 		dl1.Resize(fyne.NewSize(800, 400))
 		dl1.SetFilter(storage.NewExtensionFileFilter([]string{".xlsx"}))
 		dl1.Show()
@@ -75,9 +81,9 @@ func fileopen(w fyne.Window) {
 
 func Mainform() {
 	a := app.NewWithID("xiabee")
-	w := a.NewWindow("核酸检测打卡筛选")
+	w := a.NewWindow("核酸检测未完成 成员筛查")
 	fileopen(w)
-	w.Resize(fyne.NewSize(600, 600))
+	w.Resize(fyne.NewSize(800, 400))
 	w.ShowAndRun()
 	fmt.Println("End")
 	os.Unsetenv("FYNE_FONT")
