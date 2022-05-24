@@ -6,7 +6,7 @@ i北理疫情防控打卡 表格比对
 
 * 增加GUI
 
-### 
+<img src="https://tva1.sinaimg.cn/large/0084b03xly1h2jnzk0aqoj30ln0modic.jpg" title="" alt="1653387638(1).jpg" width="348">
 
 ### 编译
 
@@ -23,8 +23,6 @@ go build main.go
 
 * Linux：暂未测试
 
-
-
 #### 命令行运行
 
 * Linux:
@@ -38,5 +36,3 @@ go build main.go
 ```bash
 main.exe 已完成核酸名单.xlsx  全体学生名单.xlsx
 ```
-
-或者将对应文件改名为`已完成核酸名单.xlsx`，` 全体学生名单.xlsx`，与`main.exe`和`windows.bat`放置于同一目录下，运行`windows.bat`
